@@ -14,18 +14,20 @@ const HlsVideoJS = ({videoSource} : {videoSource?: string}) => {
   
 
   useEffect(() => {
-    if (videoSource) {
+    if (videoSource && videoRef.current) {
       const playerVar = videoJs(videoRef.current, videoJsOption, () => {
         playerVar.src(videoSource);
         console.log("ready");
+        console.log(typeof videoRef.current);
+        console.log(videoRef.current);
         setPlayer(playerVar);
       });
     }
     return () => {
-      player?.dispose()
-      setPlayer(null)
-    }
-  }, [])
+      player?.dispose();
+      setPlayer(null);
+    };
+  }, []);
 
   return (
     <div style={{width: "100%"}}>
